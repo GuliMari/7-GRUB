@@ -77,5 +77,17 @@ GRUB_TERMINAL_OUTPUT="console"
 GRUB_CMDLINE_LINUX="crashkernel=auto spectre_v2=retpoline rd.lvm.lv=OtusRoot/root rd.lvm.lv=OtusRoot/swap rhgb quiet"
 GRUB_DISABLE_RECOVERY="true"
 ```
+Меняем /boot/efi/EFI/centos/grub.cfg 
+
+Пересоздаем initrd image:
+
+```bash
+[root@tw4 ~]# mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
+Executing: /sbin/dracut -f -v /boot/initramfs-3.10.0-1160.el7.x86_64.img 3.10.0-1160.el7.x86_64
+...
+*** Creating initramfs image file '/boot/initramfs-3.10.0-1160.el7.x86_64.img' done ***
+```
+
+
 
 
