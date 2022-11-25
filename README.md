@@ -27,3 +27,8 @@
 
 ![image](https://user-images.githubusercontent.com/108300153/203927005-4036b5f7-0b18-4ac2-a3b0-493997bf38a8.png)
 
+### Метод №3.
+
+В этом методе в той же строке в параметрах загрузки вместо `ro` пишем `rw init=/sysroot/bin/sh` для загрузки ФС сразу  в режиме Read-Write.
+
+![image](https://user-images.githubusercontent.com/108300153/203932365-c0f8f412-239e-421f-9ff9-3d0ea9609512.png)
