@@ -117,4 +117,7 @@ Executing: /sbin/dracut -f -v
 [root@tw4 01test]# lsinitrd -m /boot/initramfs-$(uname -r).img | grep test
 test
 ```
-Перезагружаем систему, не забыв выключить `quiet` и `rghb` в параметрах загрузки.
+Перезагружаем систему, не забыв выключить `quiet` и `rghb` в параметрах загрузки.  
+Любуемся пингвином:
+
+![image](https://user-images.githubusercontent.com/108300153/203970970-635bee94-826a-441f-9096-f7bbd3c11ef1.png)
