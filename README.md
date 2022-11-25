@@ -35,6 +35,8 @@
 
 ## 2. Установить систему с LVM, после чего переименовать VG.
 
+Меняем название VG:
+
 ```bash
 [root@tw4 ~]# vgs
   VG     #PV #LV #SN Attr   VSize  VFree
@@ -42,6 +44,8 @@
 [root@tw4 ~]# vgrename centos CentosRoot
   Volume group "centos" successfully renamed to "CentosRoot"
 ```
+
+Правим /etc/fstab:
 
 ```bash
 [root@tw4 ~]# sed -i 's/centos/CentosRoot/g' /etc/fstab 
@@ -59,6 +63,8 @@ UUID=7c35d157-68e6-4de6-9c10-8946fc084c95 /boot                   xfs     defaul
 UUID=D7DC-8134          /boot/efi               vfat    umask=0077,shortname=winnt 0 0
 /dev/mapper/CentosRoot-swap swap                    swap    defaults        0 0
 ```
+
+Вносим изменения в /etc/default/grub:
 
 ```bash
 [root@tw4 ~]# sed -i 's/centos/CentosRoot/g' /etc/default/grub 
