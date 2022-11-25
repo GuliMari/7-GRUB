@@ -96,5 +96,25 @@ Executing: /sbin/dracut -f -v /boot/initramfs-3.10.0-1160.el7.x86_64.img 3.10.0-
   OtusRoot   1   2   0 wz--n- 48.80g    0 
 ```
 
+## 3. Добавить модуль в initrd.
 
+Создаем директорию для нашего модуля и создаем там необходимые скрипты:
+```bash
+[root@tw4 ~]# mkdir /usr/lib/dracut/modules.d/01test
+[root@tw4 ~]# cd /usr/lib/dracut/modules.d/01test
+[root@tw4 01test]# nano module-setup.sh 
+[root@tw4 01test]# nano test.sh
+[root@tw4 01test]# chmod +x module-setup.sh test.sh 
+```
 
+Пересоздаем образ initrd:
+
+```bash
+[root@tw4 01test]# dracut -f -v
+Executing: /sbin/dracut -f -v
+...
+*** Creating initramfs image file '/boot/initramfs-3.10.0-1160.el7.x86_64.img' done ***
+[root@tw4 01test]# lsinitrd -m /boot/initramfs-$(uname -r).img | grep test
+test
+```
+Перезагружаем систему, не забыв выключить `quiet` и `rghb` в параметрах загрузки.
