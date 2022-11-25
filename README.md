@@ -41,14 +41,14 @@
 [root@tw4 ~]# vgs
   VG     #PV #LV #SN Attr   VSize  VFree
   centos   1   2   0 wz--n- 48.80g    0 
-[root@tw4 ~]# vgrename centos CentosRoot
+[root@tw4 ~]# vgrename centos OtusRoot
   Volume group "centos" successfully renamed to "CentosRoot"
 ```
 
 Правим /etc/fstab:
 
 ```bash
-[root@tw4 ~]# sed -i 's/centos/CentosRoot/g' /etc/fstab 
+[root@tw4 ~]# sed -i 's/centos/OtusRoot/g' /etc/fstab 
 [root@tw4 ~]# cat /etc/fstab 
 
 #
@@ -58,22 +58,24 @@
 # Accessible filesystems, by reference, are maintained under '/dev/disk'
 # See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
 #
-/dev/mapper/CentosRoot-root /                       xfs     defaults        0 0
+/dev/mapper/OtusRoot-root /                       xfs     defaults        0 0
 UUID=7c35d157-68e6-4de6-9c10-8946fc084c95 /boot                   xfs     defaults        0 0
 UUID=D7DC-8134          /boot/efi               vfat    umask=0077,shortname=winnt 0 0
-/dev/mapper/CentosRoot-swap swap                    swap    defaults        0 0
+/dev/mapper/OtusRoot-swap swap                    swap    defaults        0 0
 ```
 
 Вносим изменения в /etc/default/grub:
 
 ```bash
-[root@tw4 ~]# sed -i 's/centos/CentosRoot/g' /etc/default/grub 
+[root@tw4 ~]# sed -i 's/centos/OtusRoot/g' /etc/default/grub 
 [root@tw4 ~]# cat /etc/default/grub 
 GRUB_TIMEOUT=5
 GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
 GRUB_DEFAULT=saved
 GRUB_DISABLE_SUBMENU=true
 GRUB_TERMINAL_OUTPUT="console"
-GRUB_CMDLINE_LINUX="crashkernel=auto spectre_v2=retpoline rd.lvm.lv=CentosRoot/root rd.lvm.lv=CentosRoot/swap rhgb quiet"
+GRUB_CMDLINE_LINUX="crashkernel=auto spectre_v2=retpoline rd.lvm.lv=OtusRoot/root rd.lvm.lv=OtusRoot/swap rhgb quiet"
 GRUB_DISABLE_RECOVERY="true"
 ```
+
+
